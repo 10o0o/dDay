@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
 import { SubMenuButton } from './components/SubMenuButton';
 
-export function Submenu() {
-  const menus = ['디데이', '더보기'];
+interface Iprops {
+  menus: string[];
+  menuClickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  selectedMenu: string;
+}
 
-  const [selectedMenu, setSelectedMenu] = useState<string>('디데이');
-  const menuClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { value } = e.currentTarget;
-
-    setSelectedMenu(value);
-  };
-
+export function Submenu(props: Iprops) {
   return (
     <div className="flex gap-2">
-      {menus.map((menu) => (
+      {props.menus.map((menu) => (
         <SubMenuButton
           key={menu}
           name={menu}
-          onClick={menuClickHandler}
-          selectedMenu={selectedMenu}
+          onClick={props.menuClickHandler}
+          selectedMenu={props.selectedMenu}
         />
       ))}
     </div>

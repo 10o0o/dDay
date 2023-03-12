@@ -3,7 +3,13 @@ import { CheckIcon } from '../../../icons/CheckIcon';
 import { SettingButton } from './components/SettingButton';
 import { Submenu } from './SubMenu';
 
-export function Header() {
+interface Iprops {
+  subMenus: string[];
+  menuClickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  selectedMenu: string;
+}
+
+export function Header(props: Iprops) {
   return (
     <div className="flex flex-col gap-2 bg-gray-800 text-white">
       <div className="flex p-3 h-12 items-center">
@@ -19,7 +25,11 @@ export function Header() {
       </div>
 
       <div className="flex h-12 px-6 items-center">
-        <Submenu />
+        <Submenu
+          menus={props.subMenus}
+          selectedMenu={props.selectedMenu}
+          menuClickHandler={props.menuClickHandler}
+        />
       </div>
     </div>
   );

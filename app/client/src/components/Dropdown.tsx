@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown } from '../icons/ChevronDown';
-import { ChevronRight } from '../icons/ChevronRight';
+import { ChevronDownIcon } from '../icons/ChevronDownIcon';
+import { ChevronRightIcon } from '../icons/ChevronRightIcon';
 
 interface IProps {
   elements: string[];
@@ -18,7 +18,7 @@ export function Dropdown(props: IProps) {
   return (
     <div className="relative">
       <div className="flex gap-1">
-        {isOpen ? <ChevronDown /> : <ChevronRight />}
+        {isOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}
 
         <button onClick={buttonClickHandler}>{props.title}</button>
       </div>

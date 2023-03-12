@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown } from '../../../components/Dropdown';
+import { Dropdown } from '../../../../../components/Dropdown';
 
 export function GroupFilterDropdown() {
   const groups = ['아직', '기능이', '없어요'];
