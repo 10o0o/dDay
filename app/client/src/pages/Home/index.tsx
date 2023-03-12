@@ -1,7 +1,6 @@
 import React from 'react'
-import './index.css';
 
-export function App() {
+export function Home() {
   return (
     <div>
       <div>
