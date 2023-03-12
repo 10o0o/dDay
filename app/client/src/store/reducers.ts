@@ -17,9 +17,14 @@ const initialState: DDayState = {
     id: 1,
     title: 'test title',
     endDate: new Date(),
-    leftDays: 56,
+    leftDays: 1,
+  }, {
+    id: 2,
+    title: 'test title2',
+    endDate: new Date(),
+    leftDays: 22,
   }],
-  count: 2,
+  count: 3,
 };
 
 const dDaySlice = createSlice({
