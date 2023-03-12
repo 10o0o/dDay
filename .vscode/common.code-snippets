@@ -15,22 +15,11 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-
-	"React File Create Init": {
-		"prefix": "ri",
+	"Print to console": {
+		"prefix": "cl",
 		"body": [
-			"import React from 'react';",
-			"",
-			"export function $1(props) {",
-			"return (",
-			"<div>$1</div>",
-			");",
-			"}",
-		]
-	},
-
-	"React Hook useState": {
-		"prefix": "us",
-		"body": "const [$1, set${1/(.*)/${1:/capitalize}/}] = useState<$2>($3);"
+			"console.log('$1: ', $1);",
+		],
+		"description": "Log output to console"
 	},
 }

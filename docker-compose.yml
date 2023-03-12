@@ -22,7 +22,7 @@ services:
       - ./app/client/:/app
     working_dir: /app
     ports:
-      - 7100:3100
+      - 7100:7100
     command: 'yarn dev'
     networks:
       - d_day_dev
