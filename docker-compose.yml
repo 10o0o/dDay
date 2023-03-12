@@ -1,0 +1,33 @@
+version: '3.5'
+
+services:
+  # dev_erp_server:
+  #   container_name: dev_erp_server
+  #   image: erp_server
+  #   ports:
+  #     - 4001:3000
+  #   volumes:
+  #     - ./packages/erp_server/:/app
+  #   working_dir: /app
+  #   command: 'yarn start:dev'
+  #   networks:
+  #     - d_day_dev
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+
+  dev_d_day_client:
+    container_name: dev_d_day_client_container
+    image: d_day_client
+    volumes:
+      - ./app/client/:/app
+    working_dir: /app
+    ports:
+      - 7100:3100
+    command: 'yarn dev'
+    networks:
+      - d_day_dev
+
+networks:
+  d_day_dev:
+    name: d_day__network_dev
+    driver: bridge
