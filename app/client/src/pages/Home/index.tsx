@@ -1,10 +1,13 @@
 import React from 'react';
+import { Header } from './Header';
 
 export function Home() {
   return (
-    <div>
-      <div>Hello world!</div>
-      <div className="text-3xl font-bold underline">Hello world!</div>
+    <div className="w-full">
+      <div className="flex flex-col p-12 w-full">
+        <Header />
+        <div>title</div>
+      </div>
     </div>
   );
 }
