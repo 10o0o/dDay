@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DDay, DDayAddPayload, DDayRemovePayload, DDayUpdatePayload } from '../interfaces';
-import { RootState } from './store';
 
 interface DDayState {
   dDays: DDay[];
