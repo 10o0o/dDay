@@ -1,6 +1,5 @@
+import { CheckIcon, Cog8ToothIcon } from '@heroicons/react/24/solid';
 import React from 'react';
-import { CheckIcon } from '../../../icons/CheckIcon';
-import { SettingButton } from './components/SettingButton';
 import { Submenu } from './SubMenu';
 
 interface Iprops {
@@ -14,13 +13,13 @@ export function Header(props: Iprops) {
     <div className="flex flex-col gap-2 bg-gray-800 text-white">
       <div className="flex p-3 h-12 items-center">
         <div className="mr-2">
-          <CheckIcon />
+          <CheckIcon className="w-6 h-6 my-auto" />
         </div>
 
         <h1 className="text-3xl font-bold">Get Your D-Day!</h1>
 
         <div className="ml-auto">
-          <SettingButton />
+          <Cog8ToothIcon className="w-6 h-6" />
         </div>
       </div>
 

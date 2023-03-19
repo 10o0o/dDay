@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDownIcon } from '../icons/ChevronDownIcon';
-import { ChevronRightIcon } from '../icons/ChevronRightIcon';
-
+import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 interface IProps {
   elements: string[];
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -18,7 +16,11 @@ export function Dropdown(props: IProps) {
   return (
     <div className="relative">
       <div className="flex gap-1">
-        {isOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}
+        {isOpen ? (
+          <ChevronDownIcon className="w-5 h-5 my-auto" />
+        ) : (
+          <ChevronRightIcon className="w-5 h-5 my-auto" />
+        )}
 
         <button onClick={buttonClickHandler}>{props.title}</button>
       </div>
