@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { DDayAddPayload } from '../../../interfaces';
 
-export function Content() {
-  const [form, setForm] = useState<DDayAddPayload>({
-    title: '',
-    endDate: new Date(),
-  });
+interface IProps {
+  form: DDayAddPayload;
+  setForm: (payload: DDayAddPayload) => void;
+}
 
+export function Content(props: IProps) {
   return (
     <div
       className="relative flex-1 justify-center items-center

@@ -31,7 +31,7 @@ const initialState: DDayState = {
       leftDays: 22,
     },
   ],
-  count: 3,
+  count: 2,
 };
 
 const dDaySlice = createSlice({
@@ -43,20 +43,17 @@ const dDaySlice = createSlice({
        * TODO
        * leftDays auto calculator
        */
+      state.count += 1;
 
       state.dDays.push({
         id: state.count,
         leftDays: state.count,
         ...action.payload,
       });
-      state.count += 1;
     },
 
     removeDDay: (state, action: PayloadAction<DDayRemovePayload>) => {
-      return {
-        dDays: state.dDays.filter((dDay) => dDay.id !== action.payload.id),
-        count: state.count,
-      };
+      state.dDays = state.dDays.filter((dDay) => dDay.id !== action.payload.id);
     },
 
     updateDDay: (state, action: PayloadAction<DDayUpdatePayload>) => {
@@ -79,11 +76,6 @@ const dDaySlice = createSlice({
            * leftDays auto calculator
            */
         }
-
-        return {
-          dDays: newDdays,
-          count: state.count,
-        };
       }
     },
   },

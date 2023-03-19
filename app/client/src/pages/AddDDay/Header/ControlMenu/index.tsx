@@ -1,10 +1,18 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../../components/Button';
+import { DDayAddPayload } from '../../../../interfaces';
+import { addDDay } from '../../../../store/reducers';
 
-export function ControlMenu() {
+interface IProps {
+  form: DDayAddPayload;
+}
+
+export function ControlMenu(props: IProps) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const goHome = () => {
     navigate('/');
@@ -12,7 +20,10 @@ export function ControlMenu() {
 
   const saveHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    alert('개발중');
+
+    dispatch(addDDay(props.form));
+    alert('추가 완료');
+    goHome();
   };
 
   return (
