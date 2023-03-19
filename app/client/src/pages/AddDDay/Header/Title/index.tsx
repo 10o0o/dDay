@@ -1,6 +1,6 @@
 import { PhotoIcon } from '@heroicons/react/24/solid';
 import React from 'react';
-import { Button } from '../../../../components/Button';
+import { Button } from '../../../../common/Button';
 
 export function Title() {
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {

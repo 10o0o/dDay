@@ -5,12 +5,14 @@ interface Iprops {
   children: ReactNode;
   type?: 'button' | 'submit' | 'reset' | undefined;
   className?: string;
+  noHover?: boolean;
 }
 
 export function Button(props: Iprops) {
   return (
     <button
-      className={`btn hover:bg-gray-500 ${props.className}`}
+      className={`btn ${props.className} 
+        ${!props.noHover ? 'hover:bg-gray-500' : ''}`}
       type={props.type || 'button'}
       onClick={props.onClick}
     >

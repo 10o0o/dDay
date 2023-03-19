@@ -9,6 +9,15 @@ export function AddDDay() {
     endDate: new Date(),
   });
 
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
   return (
     <div
       className="w-full h-full min-h-screen bg-gray-600 text-rose-500
@@ -16,7 +25,7 @@ export function AddDDay() {
     "
     >
       <Header form={form} setForm={setForm} />
-      <Content form={form} setForm={setForm} />
+      <Content form={form} setForm={setForm} changeHandler={changeHandler} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../../../components/Button';
+import { Button } from '../../../../common/Button';
 import { DDayAddPayload } from '../../../../interfaces';
 import { addDDay } from '../../../../store/reducers';
 

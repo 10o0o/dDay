@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../../../../../components/Button';
+import { Button } from '../../../../../common/Button';
 import { DDay } from '../../../../../interfaces';
 import { Title } from './components/Title';
 
