@@ -41,12 +41,12 @@ const dDaySlice = createSlice({
     addDDay: (state, action: PayloadAction<DDayAddPayload>) => {
       /**
        * TODO
-       * endDate auto calculator
+       * leftDays auto calculator
        */
 
       state.dDays.push({
         id: state.count,
-        endDate: new Date(),
+        leftDays: state.count,
         ...action.payload,
       });
       state.count += 1;
@@ -73,10 +73,10 @@ const dDaySlice = createSlice({
         const newDdays = [...state.dDays];
         newDdays[targetDdayIndex] = updatedTargetDday;
 
-        if (action.payload.leftDays) {
+        if (action.payload.endDate) {
           /**
            * TODO
-           * endDate auto calculator
+           * leftDays auto calculator
            */
         }
 

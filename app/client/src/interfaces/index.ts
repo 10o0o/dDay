@@ -1,5 +1,5 @@
 export interface DDayAddPayload {
-  leftDays?: number;
+  endDate: Date;
   title: string;
 }
 
@@ -7,10 +7,8 @@ export interface DDayRemovePayload {
   id: number;
 }
 
-export interface DDayUpdatePayload extends DDayAddPayload, DDayRemovePayload {
-
-}
+export interface DDayUpdatePayload extends DDayAddPayload, DDayRemovePayload {}
 
 export interface DDay extends DDayAddPayload, DDayRemovePayload {
-  endDate: Date;
+  leftDays: number;
 }
