@@ -23,9 +23,7 @@ export function Home() {
         />
 
         <div className="w-full flex flex-col gap-2 px-6">
-          <Content
-            selectedMenu={selectSubMenu}
-          />
+          <Content selectedMenu={selectSubMenu} />
         </div>
 
         <DDayAddButton />

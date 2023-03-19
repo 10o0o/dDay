@@ -4,7 +4,7 @@ import { DDay } from '../../../../../interfaces';
 import { Title } from './components/Title';
 
 interface Iprops {
-  dDay: DDay
+  dDay: DDay;
 }
 
 export function DDayComponent(props: Iprops) {
@@ -12,9 +12,8 @@ export function DDayComponent(props: Iprops) {
 
   return (
     <Button
-      className='w-full bg-gray-800 text-white p-4 
-      flex flex-col justify-between rounded-lg h-52
-      border'
+      className="w-full bg-gray-800 text-white p-4 
+      flex flex-col justify-between rounded-lg h-52"
     >
       <Title dDay={dDay} />
       <div>id: {dDay.id}</div>

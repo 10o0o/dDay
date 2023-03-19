@@ -8,6 +8,10 @@ export const router = createBrowserRouter([
     element: <Home />,
   },
   {
+    path: '',
+
+  },
+  {
     path: '/to-be-developed',
     element: <TBD />,
   },

@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DDay, DDayAddPayload, DDayRemovePayload, DDayUpdatePayload } from '../interfaces';
+import {
+  DDay,
+  DDayAddPayload,
+  DDayRemovePayload,
+  DDayUpdatePayload,
+} from '../interfaces';
 
 interface DDayState {
   dDays: DDay[];
@@ -12,17 +17,20 @@ interface DDayState {
 // };
 
 const initialState: DDayState = {
-  dDays: [{
-    id: 1,
-    title: 'test title',
-    endDate: new Date(),
-    leftDays: 1,
-  }, {
-    id: 2,
-    title: 'test title2',
-    endDate: new Date(),
-    leftDays: 22,
-  }],
+  dDays: [
+    {
+      id: 1,
+      title: 'test title',
+      endDate: new Date(),
+      leftDays: 1,
+    },
+    {
+      id: 2,
+      title: 'test title2',
+      endDate: new Date(),
+      leftDays: 22,
+    },
+  ],
   count: 3,
 };
 
@@ -39,7 +47,7 @@ const dDaySlice = createSlice({
       state.dDays.push({
         id: state.count,
         endDate: new Date(),
-        ...action.payload
+        ...action.payload,
       });
       state.count += 1;
     },
@@ -47,12 +55,14 @@ const dDaySlice = createSlice({
     removeDDay: (state, action: PayloadAction<DDayRemovePayload>) => {
       return {
         dDays: state.dDays.filter((dDay) => dDay.id !== action.payload.id),
-        count: state.count
-      }
+        count: state.count,
+      };
     },
 
     updateDDay: (state, action: PayloadAction<DDayUpdatePayload>) => {
-      const targetDdayIndex = state.dDays.findIndex(el => el.id === action.payload.id);
+      const targetDdayIndex = state.dDays.findIndex(
+        (el) => el.id === action.payload.id,
+      );
 
       if (targetDdayIndex !== -1) {
         const updatedTargetDday = {
@@ -72,10 +82,10 @@ const dDaySlice = createSlice({
 
         return {
           dDays: newDdays,
-          count: state.count
-        }
+          count: state.count,
+        };
       }
-    }
+    },
   },
 });
 
