@@ -7,7 +7,20 @@ interface IProps {
 }
 
 export function DateChanger(props: IProps) {
-  const changeHandler = () => {
+  const { selectedDate, setSelectedDate } = props;
+
+  const changeHandler = (type: string, value: number) => {
+    const date = new Date(selectedDate);
+
+    if (type === 'year') {
+      date.setFullYear(value);
+    } else if (type === 'month') {
+      date.setMonth(value);
+    } else if (type === 'day') {
+      date.setDate(value);
+    }
+
+    setSelectedDate(date);
     // TODO
   };
 

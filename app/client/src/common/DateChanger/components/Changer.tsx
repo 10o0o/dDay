@@ -3,7 +3,7 @@ import { Button } from '../../Button';
 
 interface IProps {
   type: 'year' | 'month' | 'day';
-  changeHandler: () => void;
+  changeHandler: (type: string, value: number) => void;
   curValue: number;
 }
 
@@ -18,7 +18,7 @@ const listTypeMap = {
 };
 
 export function Changer(props: IProps) {
-  const { type, changeHandler, curValue } = props;
+  const { type, curValue } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   const [centerValue, setCenterValue] = useState<number>(curValue);
@@ -51,6 +51,10 @@ export function Changer(props: IProps) {
       }
     }
   };
+
+  useEffect(() => {
+    props.changeHandler(type, centerValue);
+  }, [centerValue]);
 
   const lists = useMemo<number[]>(() => {
     return listTypeMap[type];
