@@ -26,13 +26,14 @@ export function DateChanger(props: IProps) {
 
   return (
     <div className="border flex gap-8 justify-center relative">
-      <Changer
-        type="year"
-        changeHandler={changeHandler}
-        curValue={props.selectedDate.getFullYear()}
-      />
-      <div>dateChanger</div>
-      <div>dateChanger</div>
+      {['year', 'month', 'day'].map((type) => (
+        <Changer
+          key={type}
+          type={type as 'year' | 'month' | 'day'}
+          changeHandler={changeHandler}
+          selectedDate={selectedDate}
+        />
+      ))}
     </div>
   );
 }

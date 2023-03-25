@@ -1,27 +1,26 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { listTypeMap } from '../../../libs';
 import { Button } from '../../Button';
 
 interface IProps {
   type: 'year' | 'month' | 'day';
   changeHandler: (type: string, value: number) => void;
-  curValue: number;
+  selectedDate: Date;
 }
 
-const listTypeMap = {
-  year: new Array(203).fill(null).map((_, index) => {
-    if (index === 0) return 0;
-    if (index === 202) return 9999;
-    return index + 1899;
-  }),
-  month: [12],
-  day: [1],
-};
-
 export function Changer(props: IProps) {
-  const { type, curValue } = props;
+  const { type, selectedDate } = props;
   const ref = useRef<HTMLDivElement>(null);
 
-  const [centerValue, setCenterValue] = useState<number>(curValue);
+  const curValue = useMemo(() => {
+    if (type === 'year') return selectedDate.getFullYear();
+    if (type === 'month') return selectedDate.getMonth();
+    if (type === 'day') return selectedDate.getDate();
+
+    return 0;
+  }, [type, selectedDate]);
+
+  const [centerValue, setCenterValue] = useState<number>(-1);
 
   const setScrollToTarget = (targetIndex: number) => {
     if (ref.current) {
@@ -65,10 +64,15 @@ export function Changer(props: IProps) {
   };
 
   useEffect(() => {
-    props.changeHandler(type, centerValue);
+    if (centerValue) {
+      props.changeHandler(type, centerValue);
+    }
   }, [centerValue]);
 
   const lists = useMemo<number[]>(() => {
+    if (type === 'day') {
+    }
+
     return listTypeMap[type];
   }, [type]);
 
@@ -79,7 +83,9 @@ export function Changer(props: IProps) {
 
       <div
         className="w-full overflow-y-auto no-scroll
-      flex flex-col h-[159px] snap-y scroll-smooth"
+      flex flex-col h-[159px] snap-y scroll-smooth
+      gradient
+      "
         onScroll={scrollHandler}
         ref={ref}
       >

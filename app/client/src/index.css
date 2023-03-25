@@ -7,3 +7,9 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 } 
+
+.gradient {
+  background: linear-gradient(to bottom, rgba(156, 163, 175, 0), rgba(156, 163, 175, 1), rgba(156, 163, 175, 0));
+  /* background: linear-gradient(to bottom, transparent, transparent 50%, rgba(0, 0, 0, 1) 50%, transparent); */
+
+}
