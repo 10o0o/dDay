@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Button } from '../../Button';
 
 interface IProps {
   type: 'year' | 'month' | 'day';
@@ -7,7 +8,11 @@ interface IProps {
 }
 
 const listTypeMap = {
-  year: new Array(201).fill(null).map((_, index) => index + 1900),
+  year: new Array(203).fill(null).map((_, index) => {
+    if (index === 0) return 0;
+    if (index === 202) return 9999;
+    return index + 1899;
+  }),
   month: [12],
   day: [1],
 };
@@ -16,83 +21,70 @@ export function Changer(props: IProps) {
   const { type, changeHandler, curValue } = props;
   const ref = useRef<HTMLDivElement>(null);
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [scrollVelocity, setScrollVelocity] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
-
-  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const newScrollPosition = scrollPosition + e.deltaY;
-    setScrollPosition(newScrollPosition);
-    setScrollVelocity(e.deltaY);
-    setIsScrolling(true);
-  };
-
-  useEffect(() => {
-    let rafId: number;
-    let lastScrollTime = Date.now();
-
-    const updatePosition = () => {
-      const now = Date.now();
-      const elapsed = now - lastScrollTime;
-      lastScrollTime = now;
-
-      const factor = Math.exp(-elapsed / 300);
-      const newScrollPosition =
-        scrollPosition + (scrollVelocity * (1 - factor)) / 60;
-
-      if (Math.abs(scrollVelocity) > 0.1) {
-        rafId = requestAnimationFrame(updatePosition);
-      } else {
-        setIsScrolling(false);
-      }
-
-      setScrollPosition(newScrollPosition);
-      setScrollVelocity(scrollVelocity * factor);
-    };
-
-    if (isScrolling) {
-      rafId = requestAnimationFrame(updatePosition);
-    }
-
-    return () => {
-      cancelAnimationFrame(rafId);
-    };
-  }, [isScrolling, scrollPosition, scrollVelocity]);
+  const [centerValue, setCenterValue] = useState<number>(curValue);
 
   useEffect(() => {
     if (ref.current) {
       const targetIndex = lists.findIndex((list) => list === curValue);
       const containerHeight = ref.current.offsetHeight;
-      const itemHeight = ref.current.querySelector('div')?.offsetHeight;
+      const itemHeight = ref.current.querySelector('button')?.offsetHeight;
 
       if (itemHeight !== undefined && containerHeight !== undefined) {
         const scrollTop =
           targetIndex * itemHeight + itemHeight / 2 - containerHeight / 2;
-        // scrollLeft 값을 스크롤 컨테이너에 할당합니다.
+
         ref.current.scrollTop = scrollTop;
+        setCenterValue(curValue);
       }
     }
   }, []);
+
+  const scrollHandler = (event: React.UIEvent<HTMLDivElement>) => {
+    if (ref.current) {
+      const containerHeight = ref.current.offsetHeight;
+      const itemHeight = ref.current.querySelector('button')?.offsetHeight;
+
+      if (itemHeight !== undefined && containerHeight !== undefined) {
+        const scrollTop = ref.current.scrollTop;
+        const centerIndex = Math.round(scrollTop / itemHeight) + 1;
+        setCenterValue(lists[centerIndex]);
+      }
+    }
+  };
 
   const lists = useMemo<number[]>(() => {
     return listTypeMap[type];
   }, [type]);
 
   return (
-    <div
-      className="w-20 overflow-y-auto h-40 flex flex-col no-scroll"
-      onWheel={handleWheel}
-    >
-      {lists.map((list) => (
-        <div
-          key={list}
-          className="flex items-center justify-center border-b-2 
-        border-gray-400 py-3 text-white"
-        >
-          <div>{list}</div>
-        </div>
-      ))}
+    <div className="relative w-40 h-full">
+      <div className="absolute w-40 h-[2px] top-1/3 border w-full" />
+      <div className="absolute w-40 h-[2px] top-2/3 border w-full" />
+
+      <div
+        className="w-full overflow-y-auto no-scroll
+      flex flex-col h-[159px] snap-y"
+        onScroll={scrollHandler}
+        ref={ref}
+      >
+        {lists.map((list) => (
+          <Button
+            key={list}
+            className="h-1/3 flex w-full snap-center
+              items-center justify-center py-3 text-white"
+            disabled={[0, 9999].includes(list)}
+          >
+            <span
+              className={`
+              ${[0, 9999].includes(list) ? 'text-transparent' : ''}
+              font-bold text-2xl
+              `}
+            >
+              {list}
+            </span>
+          </Button>
+        ))}
+      </div>
     </div>
   );
 }

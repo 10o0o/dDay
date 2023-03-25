@@ -12,7 +12,7 @@ export function DateChanger(props: IProps) {
   };
 
   return (
-    <div className="border flex gap-8 justify-center">
+    <div className="border flex gap-8 justify-center relative">
       <Changer
         type="year"
         changeHandler={changeHandler}
