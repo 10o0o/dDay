@@ -7,6 +7,7 @@ interface Iprops {
   className?: string;
   noHover?: boolean;
   disabled?: boolean;
+  value?: string | number;
 }
 
 export function Button(props: Iprops) {
@@ -17,6 +18,7 @@ export function Button(props: Iprops) {
       type={props.type || 'button'}
       onClick={props.onClick}
       disabled={props.disabled}
+      value={props.value || ''}
     >
       {props.children}
     </button>

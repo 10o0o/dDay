@@ -23,9 +23,8 @@ export function Changer(props: IProps) {
 
   const [centerValue, setCenterValue] = useState<number>(curValue);
 
-  useEffect(() => {
+  const setScrollToTarget = (targetIndex: number) => {
     if (ref.current) {
-      const targetIndex = lists.findIndex((list) => list === curValue);
       const containerHeight = ref.current.offsetHeight;
       const itemHeight = ref.current.querySelector('button')?.offsetHeight;
 
@@ -37,6 +36,19 @@ export function Changer(props: IProps) {
         setCenterValue(curValue);
       }
     }
+  };
+
+  const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { value } = e.currentTarget;
+    const targetIndex = lists.findIndex((list) => list === Number(value));
+
+    setScrollToTarget(targetIndex);
+  };
+
+  useEffect(() => {
+    const targetIndex = lists.findIndex((list) => list === curValue);
+
+    setScrollToTarget(targetIndex);
   }, []);
 
   const scrollHandler = (event: React.UIEvent<HTMLDivElement>) => {
@@ -67,7 +79,7 @@ export function Changer(props: IProps) {
 
       <div
         className="w-full overflow-y-auto no-scroll
-      flex flex-col h-[159px] snap-y"
+      flex flex-col h-[159px] snap-y scroll-smooth"
         onScroll={scrollHandler}
         ref={ref}
       >
@@ -77,6 +89,8 @@ export function Changer(props: IProps) {
             className="h-1/3 flex w-full snap-center
               items-center justify-center py-3 text-white"
             disabled={[0, 9999].includes(list)}
+            onClick={clickHandler}
+            value={list}
           >
             <span
               className={`
